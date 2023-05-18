@@ -4,6 +4,7 @@ import { HowItWorks } from './HowItWorks/howItWorks';
 import { MediaCoverage } from './MediaCoverage/mediaCoverage';
 import { Pricing } from './Pricing/pricing';
 import { Faqs } from './Faqs/faqs';
+import { Footer } from './Footer/footer';
 
 export function HomePage(){
     return(
@@ -13,6 +14,7 @@ export function HomePage(){
         <MediaCoverage/>
         <Pricing/>
         <Faqs/>
+        <Footer/>
         </>
     )
 }

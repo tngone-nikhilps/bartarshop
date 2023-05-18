@@ -13,14 +13,16 @@ export function MediaCoverage() {
           paddingBottom:20
         }}
       >
+        <div style={{ position: "absolute", top: "10%", right: "10%", zIndex: 0 }}>
         <img
-          style={{ position: "absolute", top: "10%", right: "10%", zIndex: 1 }}
+          // style={{ position: "absolute", top: "10%", right: "10%", zIndex: 1 }}
           width={180}
           height={147}
           src={"images/Quote mark.svg"}
         />
-        <Grid style={{ width: "90%" }}>
-          <Grid.Col
+        </div>
+        <Grid justify="center" style={{ width: "90%" }}>
+          <Grid.Col lg={12}
             style={{
               display: "grid",
               justifyContent: "center",
@@ -42,9 +44,9 @@ export function MediaCoverage() {
               Get inspired by these stories.
             </Text>
           </Grid.Col>
-          <Grid.Col lg={12}>
-            <Grid>
-              <Grid.Col lg={6}>
+          <Grid.Col  lg={12} >
+            <Grid style={{zIndex:4}}>
+              <Grid.Col lg={6} style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
                 <Card style={{width:582,height:662}} shadow="sm" padding="lg" radius="md" withBorder>
                   <Card.Section>
                     <Image
@@ -73,7 +75,7 @@ While the founder Kunbi Tinuoye is in Atlanta, the virtual accelerator and has b
                   </Card.Section>
                 </Card>
               </Grid.Col>
-              <Grid.Col lg={6}>
+              <Grid.Col lg={6} style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
               <Card style={{width:582,height:662}} shadow="sm" padding="lg" radius="md" withBorder>
                   <Card.Section>
                     <Image

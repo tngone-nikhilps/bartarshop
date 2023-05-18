@@ -17,9 +17,9 @@ import {
   Flex,
   TextInput,
 } from "@mantine/core";
-import Carousel from 'react-material-ui-carousel'
+import { Carousel } from '@mantine/carousel';
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
-import styles from "./dashboard.module.css";
+import  "./dashboard.css";
 import { Thumb } from "@mantine/core/lib/ColorPicker/Thumb/Thumb";
 import { HowItWorks } from "../HowItWorks/howItWorks";
 
@@ -669,15 +669,42 @@ export function DashBoard() {
           </Text>
         </Grid.Col>
         <Grid.Col>
-          <Carousel>
-          {/* <Item></Item> */}
-          </Carousel>
-          {/* <Carousel withIndicators align="center">
+          {/* <Carousel withIndicators>
+            <Carousel.Slide>2</Carousel.Slide>
+            <Carousel.Slide>3</Carousel.Slide>
+          
+          </Carousel> */}
+          <Carousel withIndicators
+          // dragFree={true}
+          nextControlIcon={<></>}
+          previousControlIcon={<></>}
+          draggable={true}
+          styles={()=>({
+            indicator:{
+              background:'transparent',
+              width:10,
+              height:10,
+              borderRadius:'100%',
+              border:'.5px solid black',
+              '&[data-active]':{
+                background:'black',
+              width:10,
+              height:10,
+              borderRadius:'100%'
+              },
+                
+              
+              
+              
+            }
+
+          })}
+           align="center">
             <Carousel.Slide>2
               <Grid>
                 <Grid.Col
                   xs={12} lg={6}
-                  style={{ display: "flex", justifyContent: "center" }}
+                  style={{ display: "flex", justifyContent: "center",alignItems:'center',flexDirection:'column' }}
                 >
                   <div
                     style={{
@@ -689,6 +716,28 @@ export function DashBoard() {
                     <Text weight={700} size={18} style={{paddingTop:20,padding:10}}>Reviving Bartering in a Modern Form for Small Businesses</Text>
                     <Text weight={400} size={14} style={{padding:10,paddingTop:12}}>As soon as I saw The Barter Shop idea come across my desk, I loved it. Bartering used to be the way of the world, and I love bringing it back in a modern form. Every small business should sign up and start trading services!</Text>
                   </div>
+                  <Grid justify="center" style={{width:'70%',marginTop:"30px"}}>
+                <Grid.Col xs={2}>
+                  <img
+                    src="images/homeImage.svg"
+                    width={56}
+                    height={56}
+                    style={{
+                      borderRadius: "100%",
+                      border: "1px solid #999999",
+                    }}
+                  />
+                </Grid.Col>
+                <Grid.Col xs={8}>
+                  <Text weight={700} size={18}>
+                    The Tech Coach LLC
+                  </Text>
+                  <Text weight={400} size={14} >
+                    Freelance Web and the{" "}
+                  </Text>
+                </Grid.Col>
+              </Grid>
+                  
                 </Grid.Col>
 
                 <Grid.Col
@@ -712,7 +761,7 @@ export function DashBoard() {
             </Carousel.Slide>
             <Carousel.Slide>2</Carousel.Slide>
             <Carousel.Slide>3</Carousel.Slide>
-          </Carousel> */}
+          </Carousel>
         </Grid.Col>
       </Grid>
     </>

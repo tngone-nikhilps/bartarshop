@@ -1,6 +1,7 @@
 import { Button, Divider, Grid, Text } from "@mantine/core";
-import React from "react";
+import React, { useState } from "react";
 export function HowItWorks() {
+  const [howWorks,setHowWorks]=useState(1)
   return (
     <>
       <div
@@ -19,58 +20,58 @@ export function HowItWorks() {
             </Grid.Col>
         
           <Grid.Col  md={12} lg={6}>
-            <div onClick={()=>console.log('hekkooo')} style={{marginTop:20}}>
+            <div onClick={()=>setHowWorks(1)} style={{marginTop:20}}>
               <Divider
                 orientation="horizontal"
                 size={"md"}
-                color="#01CECA"
+                color={howWorks==1?"#01CECA":'#c3f3f2'}
                 
               ></Divider>
-              <Text weight={800} size={32} style={{ color: "#01CECA",marginTop:20 }}>
+              <Text weight={800} size={32} style={{ color: howWorks==1?"#01CECA":'#c3f3f2',marginTop:20 }}>
                 1.Register
               </Text>
-              <Text weight={400} size={20} style={{paddingTop:5}}>
+              <Text weight={400} size={20} style={{paddingTop:5,color:howWorks==1?'black':'#d1d1d1'}}>
                 Create an account and update your business details.
               </Text>
             </div>
-            <div style={{marginTop:20}}>
+            <div onClick={()=>setHowWorks(2)} style={{marginTop:20}}>
               <Divider
               
                 orientation="horizontal"
                 size={"md"}
-                color="#01CECA"
+                color={howWorks==2?"#01CECA":'#c3f3f2'}
               ></Divider>
-              <Text weight={800} size={32} style={{ color: "#01CECA",marginTop:20 }}>
+              <Text weight={800} size={32} style={{ color: howWorks==2?"#01CECA":'#c3f3f2',marginTop:20 }}>
                 2.Search
               </Text>
-              <Text weight={400} size={20} style={{paddingTop:5}}>
+              <Text weight={400} size={20} style={{paddingTop:5,color:howWorks==2?'black':'#d1d1d1'}}>
                 Look through industry categories to quickly find vetted barter
                 professionals by service or name.
               </Text>
             </div>
-            <div style={{marginTop:20}}>
+            <div onClick={()=>setHowWorks(3)} style={{marginTop:20}}>
               <Divider
                 orientation="horizontal"
                 size={"md"}
-                color="#01CECA"
+                color={howWorks==3?"#01CECA":'#c3f3f2'}
               ></Divider>
-              <Text weight={800} size={32} style={{ color: "#01CECA",marginTop:20 }}>
+              <Text weight={800} size={32} style={{ color: howWorks==3?"#01CECA":'#c3f3f2',marginTop:20 }}>
                 3.Chat
               </Text>
-              <Text weight={400} size={20} style={{paddingTop:5}}>
+              <Text weight={400} size={20} style={{paddingTop:5,color:howWorks==3?'black':'#d1d1d1'}}>
                 Reach out and negotiate barter terms with someone local to you.
               </Text>
             </div>
-            <div style={{marginTop:20}}>
+            <div onClick={()=>setHowWorks(4)} style={{marginTop:20}}>
               <Divider
                 orientation="horizontal"
                 size={"md"}
-                color="#01CECA"
+                color={howWorks==4?"#01CECA":'#c3f3f2'}
               ></Divider>
-              <Text weight={800} size={32} style={{ color: "#01CECA",marginTop:20 }}>
+              <Text weight={800} size={32} style={{ color: howWorks==4?"#01CECA":'#c3f3f2',marginTop:20 }}>
                 4.Barter
               </Text>
-              <Text weight={400} size={20} style={{paddingTop:5}}>
+              <Text weight={400} size={20} style={{paddingTop:5,color:howWorks==4?'black':'#d1d1d1'}}>
                 Initiate a barter right from the chat. All barters all
                 solidified with a barter agreement signed by both parties via
                 DocuSign.
