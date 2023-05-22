@@ -6,6 +6,7 @@ import { Pricing } from './Pricing/pricing';
 import { Faqs } from './Faqs/faqs';
 import { Footer } from './Footer/footer';
 
+
 export function HomePage(){
     return(
         <>

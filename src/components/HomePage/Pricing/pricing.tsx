@@ -1,7 +1,13 @@
 import { Badge, Card, Grid, Text, Image, Button, Group } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import React from "react";
 
 export function Pricing() {
+  const xs = useMediaQuery('(max-width: 575.98px)');      
+  const sm = useMediaQuery('(min-width: 576px) and (max-width: 767.98px)');    
+  const md = useMediaQuery('(min-width: 768px) and (max-width: 991.98px)');    
+  const lg = useMediaQuery('(min-width: 992px) and (max-width: 1199.98px)');   
+  const xl = useMediaQuery('(min-width: 1200px)');  
   return (
     <>
       <div
@@ -21,14 +27,14 @@ export function Pricing() {
               alignItems: "center",
             }}
           >
-            <Text style={{ paddingTop: 20 }} weight={700} size={48}>
+            <Text style={{ paddingTop: 20 }} align="center" weight={700} size={xs?32:sm?36:md?40:lg?44:48}>
               Transparent Pricing for every stage
             </Text>
           </Grid.Col>
           <Grid.Col style={{ display: "grid", justifyContent: "center",marginTop:25 }}>
             <div
               style={{
-                width: 424,
+                width: 442,
                 height: 73,
                 backgroundColor: "#e1f6f5",
                 borderRadius: 50,

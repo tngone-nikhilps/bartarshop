@@ -1,7 +1,13 @@
 import { Accordion, Button, Grid, List, Text } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import React from "react";
 
 export function Faqs() {
+  const xs = useMediaQuery('(max-width: 575.98px)');      
+  const sm = useMediaQuery('(max-width: 767.98px)');    
+  const md = useMediaQuery(' (max-width: 991.98px)');    
+  const lg = useMediaQuery(' (max-width: 1199.98px)');   
+  const xl = useMediaQuery('(min-width: 1200px)');
   return (
     <>
       <div
@@ -41,7 +47,7 @@ export function Faqs() {
               chevron={<img width={176} height={34} src={"images/add.svg"} />}
               styles={() => ({
                 label: {
-                  fontSize: 32,
+                  fontSize: xs?24:sm?26:md?28:lg?30:32,
                   fontWeight: 700,
                 },
                 item: {
@@ -97,7 +103,7 @@ export function Faqs() {
                 </Accordion.Panel>
               </Accordion.Item>
 
-              <Accordion.Item value="what">
+              <Accordion.Item  value="what">
                 <Accordion.Control>What will we be testing?</Accordion.Control>
                 <Accordion.Panel>
                   As a Barter Shop beta member, you will be using and testing

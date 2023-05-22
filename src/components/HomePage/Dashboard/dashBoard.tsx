@@ -17,11 +17,17 @@ import {
   Flex,
   TextInput,
 } from "@mantine/core";
+import {GoogleMap,useLoadScript,LoadScript, useJsApiLoader, Marker,Autocomplete} from '@react-google-maps/api'
 import { Carousel } from '@mantine/carousel';
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import  "./dashboard.css";
 import { Thumb } from "@mantine/core/lib/ColorPicker/Thumb/Thumb";
 import { HowItWorks } from "../HowItWorks/howItWorks";
+const center = {
+  lat: 37.7749,
+  lng: -122.4194,
+};
+
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -93,12 +99,20 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export function DashBoard() {
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: "AIzaSyBXdi9StkIdtumZaQkcZ2pZaZiYiXlqHpw",
+    libraries:['places']
+  })
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = useStyles();
-  const md = useMediaQuery("(max-width: 890px)");
-  const sm = useMediaQuery("(max-width: 480px)");
+  const xs = useMediaQuery('(max-width: 575.98px)');      
+  const sm = useMediaQuery('(max-width: 767.98px)');    
+  const md = useMediaQuery(' (max-width: 991.98px)');    
+  const lg = useMediaQuery(' (max-width: 1199.98px)');   
+  const xl = useMediaQuery('(min-width: 1200px)');
 
   return (
     <>
@@ -245,7 +259,7 @@ export function DashBoard() {
           style={{
             height: md?250:177,
             position: "absolute",
-            bottom: 40,
+            bottom: sm?20:40,
             transform: 'translateY(100%)',
             backgroundColor: "white",
             borderRadius: 20,
@@ -263,6 +277,8 @@ export function DashBoard() {
           </Text>
           <Grid style={{ width: "90%" }}>
             <Grid.Col xs={md?12:6} >
+             { isLoaded?
+              <Autocomplete>
               <TextInput
                 placeholder="Tag Your Service"
                 icon={
@@ -274,6 +290,8 @@ export function DashBoard() {
                   />
                 }
               />
+              </Autocomplete>:null
+}
             </Grid.Col>
 
             <Grid.Col xs={md?12:5}>
@@ -316,6 +334,7 @@ export function DashBoard() {
                 Discover what barterers near you
               </Text>
             <ScrollArea
+            style={{marginTop:20}}
             styles={()=>({
               scrollbar:{
                 background: '#e6fafa',
@@ -641,18 +660,29 @@ export function DashBoard() {
             </ScrollArea>
           </Grid.Col>
           <Grid.Col xs={6}>
-            <img
-              style={{ objectFit: "fill" }}
-              width={"100%"}
-              height={750}
-              src="images/map.svg"
-            />
+            {isLoaded?<>
+              <GoogleMap center={center} zoom={15} mapContainerStyle={{width:'100%',height:'100%'}}>
+               <Marker position={{lat: 37.7749,
+  lng: -122.4194}}></Marker>
+               </GoogleMap>
+            </>:null}
+          {/* <LoadScript googleMapsApiKey="AIzaSyBXdi9StkIdtumZaQkcZ2pZaZiYiXlqHpw">
+            
+            </LoadScript> */}
           </Grid.Col>
         </Grid>
       </div>
       <Grid
-        style={{ backgroundColor: "#FEED66", marginTop: 40, width: "100%" }}
+        style={{ backgroundColor: "#FEED66", marginTop: 40, width: "100%",position:'relative',paddingTop:40 }}
       >
+        <div style={{ position: "absolute", top: "10%", right: "10%", zIndex: 0 }}>
+        <img
+          // style={{ position: "absolute", top: "10%", right: "10%", zIndex: 1 }}
+          width={180}
+          height={147}
+          src={"images/Quote mark.svg"}
+        />
+        </div>
         <Grid.Col
           style={{
             display: "flex",
@@ -661,7 +691,7 @@ export function DashBoard() {
             flexDirection: "column",
           }}
         >
-          <Text size={48} weight={700}>
+          <Text size={xs?20:sm?30:md?38:48} weight={700}>
             Real Stories from Real Influencer
           </Text>
           <Text size={18} weight={400}>
@@ -697,8 +727,8 @@ export function DashBoard() {
               
               
             }
-
           })}
+          style={{paddingBottom:50}}
            align="center">
             <Carousel.Slide>2
               <Grid>
@@ -709,14 +739,19 @@ export function DashBoard() {
                   <div
                     style={{
                       backgroundColor: "white",
-                      width: 592,
+                      width: '79%',
                       height: 222,
+                      borderRadius:10,
+                      display:'flex',
+                      alignItems:'center',
+                      flexDirection:'column'
+
                     }}
                   >
-                    <Text weight={700} size={18} style={{paddingTop:20,padding:10}}>Reviving Bartering in a Modern Form for Small Businesses</Text>
-                    <Text weight={400} size={14} style={{padding:10,paddingTop:12}}>As soon as I saw The Barter Shop idea come across my desk, I loved it. Bartering used to be the way of the world, and I love bringing it back in a modern form. Every small business should sign up and start trading services!</Text>
+                    <Text weight={700} size={sm?14:md?16:18} style={{padding:20}}>Reviving Bartering in a Modern Form for Small Businesses</Text>
+                    <Text weight={400} size={xs?9:sm?10:md?12:14} style={{paddingRight:40,paddingLeft:40,textAlign:'center'}}>As soon as I saw The Barter Shop idea come across my desk, I loved it. Bartering used to be the way of the world, and I love bringing it back in a modern form. Every small business should sign up and start trading services!</Text>
                   </div>
-                  <Grid justify="center" style={{width:'70%',marginTop:"30px"}}>
+                  <Grid justify="center" style={{width:'60%',marginTop:"30px"}}>
                 <Grid.Col xs={2}>
                   <img
                     src="images/homeImage.svg"
@@ -724,11 +759,10 @@ export function DashBoard() {
                     height={56}
                     style={{
                       borderRadius: "100%",
-                      border: "1px solid #999999",
                     }}
                   />
                 </Grid.Col>
-                <Grid.Col xs={8}>
+                <Grid.Col xs={5}>
                   <Text weight={700} size={18}>
                     The Tech Coach LLC
                   </Text>
@@ -742,20 +776,44 @@ export function DashBoard() {
 
                 <Grid.Col
                   xs={12} lg={6}
-                  style={{ display: "flex", justifyContent: "center" }}
+                  style={{ display: "flex", justifyContent: "center",alignItems:'center',flexDirection:'column' }}
                 >
                   <div
                     style={{
                       backgroundColor: "white",
-                      width: 592,
+                      width: '79%',
                       height: 222,
+                      borderRadius:10,
+                      display:'flex',
+                      alignItems:'center',
+                      flexDirection:'column'
                     }}
                   >
-                    <Text weight={700} size={18} style={{paddingTop:20,padding:10}}>Reviving Bartering in a Modern Form for Small Businesses</Text>
-                    <Text  weight={400} size={14} style={{padding:10,paddingTop:12}}>
+                    <Text weight={700} size={sm?14:md?16:18} style={{padding:20}}>Reviving Bartering in a Modern Form for Small Businesses</Text>
+                    <Text  weight={400} size={xs?9:sm?10:md?12:14} style={{paddingRight:40,paddingLeft:40,textAlign:'center'}}>
                     The Barter App is a revolutionary concept and is spearheaded by one of the brightest individuals to come through our Nest accelerator program here at the chamber. Growing up in a generation where people are choosing non-traditional paths more often, The Barter App allows them to not only make connections but provide value to people they otherwise would not have access to.
                 </Text>
                   </div>
+                  <Grid justify="center" style={{width:'60%',marginTop:"30px"}}>
+                <Grid.Col xs={2}>
+                  <img
+                    src="images/homeImage.svg"
+                    width={56}
+                    height={56}
+                    style={{
+                      borderRadius: "100%",
+                    }}
+                  />
+                </Grid.Col>
+                <Grid.Col xs={5}>
+                  <Text weight={700} size={18}>
+                    The Tech Coach LLC
+                  </Text>
+                  <Text weight={400} size={14} >
+                    Freelance Web and the{" "}
+                  </Text>
+                </Grid.Col>
+              </Grid>
                 </Grid.Col>
               </Grid>
             </Carousel.Slide>
